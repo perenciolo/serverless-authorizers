@@ -1,0 +1,32 @@
+service: serverless-authorizers
+provider:
+  name: aws
+  runtime: nodejs10.x
+functions:
+  authorizerUser:
+    handler: authorizer.user
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: hello/rest
+          method: get
+          authorizer: ${self:custom.authorizer.users}
+          cors: true
+  login:
+    handler: handler.login
+    events:
+      - http: ANY /login
+      - http:
+          path: '{proxy+}'
+          method: any
+plugins:
+  - serverless-offline
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  authorizer:
+    users:
+      name: authorizerUser
+      type: TOKEN
+      identitySource: method.request.header.Authorization
+      identityValidationExpression: Bearer (.*)

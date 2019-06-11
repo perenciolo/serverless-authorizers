@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script>
+    /**
+     let xhrGH = new XMLHttpRequest();
+    xhrGH.open('GET', 'https://cmb7vhqk4j.execute-api.us-east-1.amazonaws.com/dev/hello/rest');
+    xhrGH.onreadystatechange = function (event) {
+      console.log(JSON.parse(event.target.response));
+    }
+    xhrGH.setRequestHeader('Content-Type', 'application/json');
+    xhrGH.setRequestHeader('Authorization', "Bearer 4674cc54-bd05-11e7-abc4-cec278b6b50b");
+    xhrGH.send();
+     */
+
+    $.ajax({
+      url: 'https://cmb7vhqk4j.execute-api.us-east-1.amazonaws.com/dev/hello/rest',
+      method: 'get',
+      crossDomain: true,
+      data: '',
+      contentType: 'application/json',
+      headers: {
+        "Authorization": "Bearer 4674cc54-bd05-11e7-abc4-cec278b6b50a",
+      },
+    }).done(function (response) {
+      console.dir(response);
+    });
+  </script>
+</body>
+
+</html>
